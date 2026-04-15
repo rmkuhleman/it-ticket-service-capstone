@@ -6,7 +6,7 @@ Date: April 14, 2026
 ### What I worked on
 - Created the GitHub repository
 - Created the documentation files
-- Finalized the project scope
+- Completed and refined the project scope document
 - Created the workflow document
 - Updated the README file
 
