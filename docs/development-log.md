@@ -8,7 +8,7 @@ Date: April 15, 2026
 - Created documentation files
 - Finalized the project scope
 - Created the workflow document
-- Updated the README.md file
+- Updated the README file
 
 ### Outcome
 - The project structure for documentation and planning is now in place.
