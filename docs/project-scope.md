@@ -1,6 +1,6 @@
 # IT Ticket Service
 
-The purpose of this project is to create a service that provides an easy way for users to get help with their IT and technical needs. The system will also allow users to give feedback after their ticket has been resolved. This service is intended to be usable for a wide range of needs, with the goal of making it suitable for smaller companies and possibly even hospitals.
+The purpose of this project is to create a service that provides an easy way for users to get help with their IT and technical needs. The system will also allow users to give feedback after their ticket has been resolved. This service is intended to be usable for a wide range of needs, with the goal of making it scalable for smaller companies and possibly even hospitals.
 
 ## Main Features
 - A ticket submission form
