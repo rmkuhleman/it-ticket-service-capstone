@@ -37,3 +37,27 @@ Date: April 15, 2026
 
 ### Next Step
 - Set up the actual project files and create the first Flask app page.
+
+## Work Session 3 - Project Setup and Initial Form Development
+Date: April 20, 2026
+
+### What I worked on
+- Opened the project locally in VS Code
+- Set up the local Python environment
+- Installed Flask
+- Created the base project files and folders
+- Created the initial Flask app and page structure
+- Connected the CSS file to the page
+- Built the static ticket submission form layout
+- Added category-based subcategory dropdown behavior using JavaScript
+- Removed the temporary alert used for testing
+
+### Outcome
+- The project has moved from planning into implementation.
+- The local Flask environment is working correctly.
+- The main ticket submission page now loads successfully in the browser.
+- The form layout is now visible and styled.
+- The issue category dropdown now updates the subcategory dropdown with relevant options.
+
+### Next Step
+- Make the form submit to Flask and begin handling the entered ticket data.
