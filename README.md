@@ -8,3 +8,7 @@ In progress. Planning and documentation are complete, and implementation is begi
 ## Documentation
 - [Project Scope](docs/project-scope.md)
 - [Workflow Diagram](docs/workflow-diagram.md)
+
+## Current Interface Preview
+
+![Current IT Ticket Service interface](screenshots/ticket-form-current.png)
