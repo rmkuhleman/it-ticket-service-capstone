@@ -11,4 +11,4 @@ The project is currently in the frontend development phase. The user interface f
 
 ## Current Capstone Progress
 
-![Alt Text](it-ticket-service-capstone/ticket-form-current-frontend-errors.png)
+![Form showing errors for required fields.](ticket-form-current-frontend-errors.png)
