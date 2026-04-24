@@ -3,7 +3,7 @@
 This capstone project focuses on creating an IT ticket service that allows users to submit technical issues, enables technicians to review and update tickets, and supports escalation, resolution, and feedback.
 
 ## Current Status
-In progress. Planning and documentation are complete, and implementation is beginning.
+The project is in an active development stage with a fully functional core ticket submission system implemented. The application now supports structured form submission, backend validation, dynamic form behavior, and improved user feedback handling. Ongoing work is focused on refining user experience and preparing for additional enhancements such as visual validation cues and potential administrative ticket handling features.
 
 ## Documentation
 - [Project Scope](docs/project-scope.md)
