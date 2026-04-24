@@ -61,3 +61,33 @@ Date: April 20, 2026
 
 ### Next Step
 - Make the form submit to Flask and begin handling the entered ticket data.
+
+## Work Session 4 - Form Validation, Error Handling, and UX Refinement
+Date: April 23, 2026
+
+### What I worked on
+- Refactored Flask backend validation to enforce all required rules server-side
+- Removed browser-based validation using `novalidate` for consistent behavior
+- Standardized field naming across Flask, HTML, and JavaScript for consistent mapping
+- Implemented structured error handling using field-based error objects
+- Updated frontend to display validation errors using a centralized error list
+- Added email format validation using regex-based checking
+- Added phone number validation with flexible formatting support
+- Improved error messaging for clarity and usability
+- Implemented per-field error dismissal in JavaScript
+- Fixed issue where unrelated validation errors disappeared when editing a single field
+- Resolved sessionStorage persistence issue for category/subcategory selection
+- Adjusted form state reset behavior when submitting or restarting a new ticket
+- Improved overall form UX consistency and validation flow
+
+### Outcome
+- The form now uses a fully centralized Flask validation system
+- Error messages are structured and correctly mapped to individual fields
+- Users receive clearer and more accurate validation feedback
+- Frontend behavior is now consistent and predictable across all fields
+- Form persistence and reset behavior now works correctly without leftover state issues
+- The system is significantly more stable and closer to production-quality form handling
+
+### Next Step
+- Improve UI feedback further by visually highlighting invalid fields (e.g., red borders)
+- Optional enhancement: add real-time validation while typing for better user experience
