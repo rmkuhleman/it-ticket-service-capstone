@@ -91,3 +91,33 @@ Date: April 23, 2026
 ### Next Step
 - Improve UI feedback further by visually highlighting invalid fields (e.g., red borders)
 - Optional enhancement: add real-time validation while typing for better user experience
+
+## Work Session 5 – Ticket List Page Enhancements and Bulk Update Logic
+**Date:** April 24, 2026
+
+### What I worked on
+- Ensured category → subcategory selection persists through invalid form submissions using `sessionStorage`.
+- Added “dirty state” tracking (`data-dirty`) to ticket status dropdowns to prevent bulk updates from overwriting unchanged tickets.
+- Updated `tickets.html` layout: added `.reset-btn` class for Reset button, aligned filters using `.ticket-filter-form`.
+- Refactored JavaScript for bulk update to only send tickets marked as modified.
+- Minor CSS adjustments for consistent spacing and visual alignment of ticket cards and filter controls.
+- Fixed Reset button alignment to match Apply button perfectly.
+- Adjusted filter input fields and dropdowns to prevent text clipping in ticket status options.
+- Updated JavaScript so the "Update All" button properly updates colored status badges on tickets without interfering with individual updates.
+- Prevented page from scrolling to top when individual ticket status is updated.
+- Verified that individual ticket updates and bulk updates operate independently and correctly.
+- Additional CSS refinements for dropdown visibility, spacing, and overall visual consistency.
+
+### Outcome
+- Subcategory selection now persists correctly across page reloads and invalid submissions.
+- Bulk Update button updates only tickets with changed status.
+- Reset button fully aligned and visually consistent with Apply button.
+- Status dropdowns display full text without clipping.
+- Status badges now update dynamically during bulk updates without affecting individual ticket functionality.
+- Page no longer jumps to the top when updating tickets.
+- Frontend logic is more robust, polished, and reliable for single and bulk ticket operations.
+
+### Next Step
+- Implement backend logic to filter tickets based on search, status, and sort selections.
+- Build user-facing ticket status page to allow users to view only their submitted tickets.
+- Begin work on submission confirmation page enhancements and feedback page setup.
