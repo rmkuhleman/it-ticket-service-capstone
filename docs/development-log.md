@@ -121,3 +121,30 @@ Date: April 23, 2026
 - Implement backend logic to filter tickets based on search, status, and sort selections.
 - Build user-facing ticket status page to allow users to view only their submitted tickets.
 - Begin work on submission confirmation page enhancements and feedback page setup.
+
+## Work Session 6 – Ticket Submission Page Refinements and My Tickets Integration
+**Date:** April 25, 2026
+
+### What I worked on
+- Connected the “View Details” button from the My Tickets page to the ticket submission confirmation page (`confirm.html`), enabling users to view a specific ticket’s details.
+- Added a “Back to My Tickets” button on the Ticket Submitted page for easier navigation without relying on the browser back button.
+- Added the ticket status display to the Ticket Submitted page for consistency with My Tickets page.
+- Matched the visual style of the status badge on the Ticket Submitted page to match the My Tickets page (oval shape, gray background, colored text).
+- Standardized description box styling across pages: scrollable box on the Ticket Submitted page and a shorter preview box on the My Tickets page.
+- Implemented text truncation for the description preview on My Tickets page with ellipsis to indicate overflow.
+- Fixed description preview box overflow issues, ensuring text was not cut off mid-line and maintained consistent layout.
+- Adjusted CSS for scrollable description boxes to prevent horizontal scrolling and improve readability.
+- Ensured all updates preserved existing form validation, session handling, and My Tickets page functionality.
+- Verified all navigation links, status badges, and description displays remained consistent and visually aligned across pages.
+
+### Outcome
+- Users can now navigate directly from Ticket Submitted page to their list of submitted tickets.
+- Status information is displayed consistently across pages, improving clarity for users.
+- Description previews on My Tickets page are visually clean and truncated properly with ellipsis, without cutting off text mid-line.
+- Ticket Submitted page now displays the full ticket description in a scrollable box, matching form page style.
+- All changes preserved current form validation, submission, and error handling behavior.
+
+### Next Step
+- Review and optimize CSS styling further for mobile responsiveness.
+- Implement additional ticket detail enhancements (e.g., resolution notes, assigned technician view).
+- Optionally add real-time status update notifications to My Tickets page.
