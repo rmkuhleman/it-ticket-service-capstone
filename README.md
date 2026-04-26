@@ -11,3 +11,6 @@ The project now has a functional frontend and initial backend integration. Ticke
 
 ## Current Capstone Progress
 
+![Form showing errors for required fields.](images/ticket-form-front-page-done.png)
+![Form showing errors for required fields.](images/my-ticket-page-first-revision.png)
+![Form showing errors for required fields.](images/ticket-submitted-form-connected.png)
