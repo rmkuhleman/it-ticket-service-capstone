@@ -148,3 +148,32 @@ Date: April 23, 2026
 - Review and optimize CSS styling further for mobile responsiveness.
 - Implement additional ticket detail enhancements (e.g., resolution notes, assigned technician view).
 - Optionally add real-time status update notifications to My Tickets page.
+
+## Work Session 7 – User-Specific Ticket Isolation and Session Management
+**Date:** April 26, 2026
+
+### What I worked on
+- Debugged `/my_tickets` page to ensure tickets displayed only for the logged-in user.
+- Updated ticket submission logic to pull username from session instead of the form input, eliminating potential cross-user ticket display.  
+- Fixed login flow so that users remain logged in for the duration of their browser session.  
+- Added logout functionality with a “Switch User” button on the My Tickets page for immediate session clearing.  
+- Implemented inactivity-based logout across all tabs, automatically signing out users after 15 minutes of no activity (mouse, keyboard, scroll, touch).  
+- Ensured activity in any tab resets the inactivity timer for all open tabs.  
+- Added explanatory text on the login page guiding new and returning users on how to use the username field.  
+- Verified that session persists properly until browser closes or inactivity logout triggers; no “remember me” option implemented for security.  
+- Confirmed that filtering on My Tickets page (ticket ID, category, subcategory, description, date) continues to function correctly for user-specific tickets.  
+- Ensured ticket detail pages (`confirm.html`) only show information for the logged-in user.  
+- Preserved all existing features, including form validation, status badges, description box styling, and navigation links.  
+- Tested logout behavior to ensure session clears and no residual ticket information is accessible in any tab.  
+
+### Outcome
+- Users now see only their own tickets on the My Tickets page.  
+- Session-based login and inactivity logout ensure security and user-specific ticket isolation.  
+- Ticket filters and detail views function correctly without affecting other users.  
+- Login guidance improves user understanding for new and returning users.  
+- System is stable, and all previously working features remain intact.  
+
+### Next Step
+- Monitor session behavior across different browsers for consistency.  
+- Begin cosmetic or UX refinements if desired (e.g., mobile responsiveness, styling tweaks).  
+- Plan enhancements for ticket detail page (resolution notes, technician assignments) in upcoming sessions.
