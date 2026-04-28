@@ -178,7 +178,7 @@ Date: April 23, 2026
 - Begin cosmetic or UX refinements if desired (e.g., mobile responsiveness, styling tweaks).  
 - Plan enhancements for ticket detail page (resolution notes, technician assignments) in upcoming sessions.
 
-- ## Work Session 8 – Authentication, Security Enhancements, and UI Refinement
+## Work Session 8 – Authentication, Security Enhancements, and UI Refinement
 **Date:** April 27, 2026
 
 ### What I worked on
