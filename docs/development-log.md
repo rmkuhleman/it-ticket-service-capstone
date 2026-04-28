@@ -177,3 +177,43 @@ Date: April 23, 2026
 - Monitor session behavior across different browsers for consistency.  
 - Begin cosmetic or UX refinements if desired (e.g., mobile responsiveness, styling tweaks).  
 - Plan enhancements for ticket detail page (resolution notes, technician assignments) in upcoming sessions.
+
+- ## Work Session 8 – Authentication, Security Enhancements, and UI Refinement
+**Date:** April 27, 2026
+
+### What I worked on
+- Implemented a full authentication system using usernames and passwords.
+- Created a new `users` table in the database to securely store account credentials.
+- Added password hashing using Werkzeug (`generate_password_hash`, `check_password_hash`) to prevent storing plaintext passwords.
+- Updated login flow to support both account creation (new users) and authentication (existing users).
+- Enforced session-based authentication across the application using `login_required`.
+- Restored and integrated logout functionality, allowing users to securely end sessions.
+- Fixed database initialization issues related to missing tables (`users`) and ensured proper creation on startup.
+- Replaced deprecated `datetime.utcnow()` usage with `datetime.now()` for improved compatibility.
+- Verified secure access control so users can only view their own tickets and details.
+- Refactored My Tickets page into a cleaner summary/dashboard view:
+  - Removed sensitive or redundant fields (email, phone, machine ID, full resolution notes).
+  - Added description preview with line clamping and ellipsis for better readability.
+  - Added a visual alert when resolution notes are available without exposing full content.
+- Improved UI/UX consistency between admin and user ticket views.
+- Enhanced resolution notes display styling and ensured persistence after updates and page refreshes.
+- Updated bulk update functionality to support both ticket status and resolution notes simultaneously.
+- Improved bulk update feedback messaging and UI positioning.
+- Refined layout and spacing across ticket cards, filters, and action buttons for better usability.
+- Ensured all filtering features (ID, category, subcategory, description, date) continue functioning correctly.
+- Conducted full regression testing to confirm no previously working features were broken.
+
+### Outcome
+- Secure authentication system successfully implemented with hashed passwords.
+- Users can now safely create accounts and log in without risk of unauthorized ticket access.
+- Application enforces proper session handling and route protection.
+- My Tickets page is now a clean, user-friendly summary dashboard.
+- Admin functionality remains intact with improved bulk update capabilities.
+- UI is more consistent, readable, and aligned with real-world helpdesk systems.
+- System remains stable with all existing functionality preserved.
+
+### Next Step
+- Consider adding a feedback system for users after tickets are marked as closed.
+- Optionally implement role-based access (admin vs user accounts).
+- Perform final UI polish and prepare for presentation/demo.
+- Practice explaining system architecture, authentication flow, and security decisions.
