@@ -11,7 +11,13 @@ The project now includes secure user authentication with hashed passwords and se
 
 ## Current Capstone Progress
 
-![Form showing errors for required fields.](images/ticket-form-login-first.png)
-![Form showing errors for required fields.](images/filtered-my-tickets-page.png)
-![Form showing errors for required fields.](images/ticket-submitted-page-time.png)
-![Form showing errors for required fields.](images/ticket-form-after-login.png)
+### User Experience
+
+
+### Ticket Management
+
+
+### Admin Interface
+
+
+### Key Features Demonstrated
