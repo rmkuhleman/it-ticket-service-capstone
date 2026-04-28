@@ -12,12 +12,19 @@ The project now includes secure user authentication with hashed passwords and se
 ## Current Capstone Progress
 
 ### User Experience
+![My Tickets Dashboard](images/updated-login-page.png)
+*Secure login page with username and password authentication, supporting both new account creation and returning user access.*
 
+![My Tickets Dashboard](images/updated-my-ticket-page.png)
+*User-specific ticket dashboard displaying submitted tickets with filtering options and real-time status tracking.*
 
 ### Ticket Management
+![My Tickets Dashboard](images/updated-progress-ticket-details-page.png)
+*Detailed view of a submitted ticket showing all relevant information while the issue is still in progress.*
 
+![My Tickets Dashboard](images/updated-closed-ticket-details-page.png)
+*Completed ticket view displaying final resolution notes once the issue has been marked as closed.*
 
 ### Admin Interface
-
-
-### Key Features Demonstrated
+![My Tickets Dashboard](images/updated-admin-page.png)
+*Administrative dashboard for managing all tickets, including status updates, resolution notes, and bulk update functionality.*
