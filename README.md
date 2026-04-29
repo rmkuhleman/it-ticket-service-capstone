@@ -18,6 +18,14 @@ Detailed project documentation can be found in the `/docs` folder, including:
 - [Time Logs](docs/time-log.md)
 - [Workflow Diagram](docs/workflow-diagram.md)
 
+## Technologies Used
+
+- Python (Flask)
+- SQLite
+- HTML, CSS, JavaScript
+- Session-based Authentication
+- Role-Based Access Control
+
 ## Current Capstone Progress
 
 ### User Experience
