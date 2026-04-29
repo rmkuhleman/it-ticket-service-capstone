@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Ticket Details</h1>
+
+    <div class="ticket-card">
+
+        <div class="ticket-header">
+            <div>
+                <div class="ticket-title">{{ full_name }}</div>
+                <div style="font-size: 13px; color: #666;">
+                    Username: {{ username if username else "Not provided" }}
+                </div>
+            </div>
+
+            <div class="ticket-status-panel">
+                <div class="ticket-status">
+                    <span class="status-label">Status</span>
+                    <span class="status-badge status-{{ (status or 'open') | lower | replace(' ', '-') }}">
+                        {{ (status or "Open") | title }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ticket-meta-grid">
+
+            {% if email %}
+            <div class="meta-item">
+                <span class="meta-label">Email</span>
+                <span class="meta-value">{{ email }}</span>
+            </div>
+            {% endif %}
+
+            {% if phone %}
+            <div class="meta-item">
+                <span class="meta-label">Phone</span>
+                <span class="meta-value">{{ phone }}</span>
+            </div>
+            {% endif %}
+
+            {% if machine_id %}
+            <div class="meta-item">
+                <span class="meta-label">Machine</span>
+                <span class="meta-value">{{ machine_id }}</span>
+            </div>
+            {% endif %}
+
+            <div class="meta-item">
+                <span class="meta-label">Category</span>
+                <span class="meta-value">{{ category }}</span>
+            </div>
+
+            {% if subcategory %}
+            <div class="meta-item">
+                <span class="meta-label">Subcategory</span>
+                <span class="meta-value">{{ subcategory }}</span>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <div class="ticket-body">
+            <span class="description-label">Description</span>
+            <p class="wrap-text description-box">{{ description }}</p>
+
+            {% if resolution_notes and status == "closed" %}
+            <div class="saved-resolution-notes">
+                <span class="description-label">Resolution Notes</span>
+                <p class="wrap-text resolution-note-display">{{ resolution_notes }}</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="my-ticket-bottom-row">
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <a href="{{ url_for('my_tickets', username=username_param) }}">Back to My Tickets</a>
+
+                {% if status == "closed" %}
+                    {% if feedback_submitted %}
+                        <span class="resolution-alert" style="padding: 6px 10px; margin: 0;">
+                            Feedback Submitted
+                        </span>
+                    {% else %}
+                        <a href="{{ url_for('feedback', ticket_id=request.args.get('ticket_id')) }}">
+                            Leave Feedback
+                        </a>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            <div class="submitted-date">
+                Submitted: <span class="local-time" data-utc="{{ created_at }}"></span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+document.querySelectorAll(".local-time").forEach(function(el) {
+    const utc = el.dataset.utc;
+    if (utc) {
+        const localDate = new Date(utc + "Z");
+        el.textContent = localDate.toLocaleString([], {
+            dateStyle: "medium",
+            timeStyle: "short"
+        });
+    }
+});
+</script>
+
+</body>
+</html>

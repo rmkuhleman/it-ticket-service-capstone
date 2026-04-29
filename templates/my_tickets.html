@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Tickets</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>My Tickets</h1>
+
+    <form action="{{ url_for('logout') }}" method="get" class="switch-user-btn">
+        <button type="submit">Logout</button>
+    </form>
+
+    <div class="filter-bar">
+        <input type="text" id="ticketIdFilter" placeholder="Ticket ID" value="{{ ticket_id_filter }}">
+        <input type="text" id="categoryFilter" placeholder="Category" value="{{ category_filter }}">
+        <input type="text" id="subcategoryFilter" placeholder="Subcategory" value="{{ subcategory_filter }}">
+        <input type="text" id="descriptionFilter" placeholder="Description" value="{{ description_filter }}">
+
+        <select id="dateModeFilter">
+            <option value="all">All dates</option>
+            <option value="specific">Choose a date</option>
+        </select>
+
+        <input type="date" id="dateFilter" value="{{ date_filter }}" style="display: none;">
+
+        <button type="button" onclick="resetFilters()">Reset Filters</button>
+    </div>
+
+    {% if tickets %}
+        {% for ticket in tickets %}
+        <div class="ticket-card"
+             data-ticket-id="{{ ticket.id }}"
+             data-category="{{ ticket.category }}"
+             data-subcategory="{{ ticket.subcategory }}"
+             data-description="{{ ticket.description }}"
+             data-created="{{ ticket.created_at }}">
+
+            <div class="ticket-header">
+                <div>
+                    <div class="ticket-title">{{ full_name if full_name else ticket.full_name }}</div>
+                    <div style="font-size: 13px; color: #666;">
+                        Username: {{ ticket.username or "Not provided" }}
+                    </div>
+                </div>
+
+                <div class="ticket-status-panel">
+                    <div class="ticket-status">
+                        <span class="status-label">Status</span>
+                        <span class="status-badge status-{{ (ticket.status or 'open') | lower | replace(' ', '-') }}">
+                            {{ (ticket.status or "Open") | title }}
+                        </span>
+
+                        {% if (ticket.status or 'open') | lower == "escalated" %}
+                            <div style="font-size:12px; color:#5b21b6; margin-top:4px;">
+                                Requires higher-level support
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticket-meta-grid">
+
+                <div class="meta-item">
+                    <span class="meta-label">Ticket ID</span>
+                    <span class="meta-value">{{ ticket.id }}</span>
+                </div>
+
+                <div class="meta-item">
+                    <span class="meta-label">Category</span>
+                    <span class="meta-value">{{ ticket.category }}</span>
+                </div>
+
+                {% if ticket.subcategory %}
+                <div class="meta-item">
+                    <span class="meta-label">Subcategory</span>
+                    <span class="meta-value">{{ ticket.subcategory }}</span>
+                </div>
+                {% endif %}
+
+            </div>
+
+            <div class="ticket-body">
+                <span class="description-label">Description Preview</span>
+                <p class="wrap-text ticket-description-preview">{{ ticket.description }}</p>
+
+                {% if ticket.resolution_notes and (ticket.status or 'open') | lower == "closed" %}
+                <div class="resolution-alert">
+                    Resolution notes available — view details to read them.
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="my-ticket-bottom-row">
+                <a href="{{ url_for('ticket_details', ticket_id=ticket['id']) }}">View Details</a>
+
+                <div class="submitted-date">
+                    Submitted: <span class="local-time" data-utc="{{ ticket.created_at }}"></span>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No tickets submitted yet.</p>
+    {% endif %}
+
+    <div style="margin-top: 20px;">
+        <a href="/"><button>Submit New Ticket</button></a>
+    </div>
+</div>
+
+<script>
+const filters = {
+    ticketId: document.getElementById("ticketIdFilter"),
+    category: document.getElementById("categoryFilter"),
+    subcategory: document.getElementById("subcategoryFilter"),
+    description: document.getElementById("descriptionFilter"),
+    dateMode: document.getElementById("dateModeFilter"),
+    date: document.getElementById("dateFilter")
+};
+
+function updateDateInputVisibility() {
+    if (filters.dateMode.value === "specific") {
+        filters.date.style.display = "inline-flex";
+    } else {
+        filters.date.value = "";
+        filters.date.style.display = "none";
+    }
+}
+
+function updateURL() {
+    const params = new URLSearchParams();
+
+    if (filters.ticketId.value) params.set("ticketId", filters.ticketId.value);
+    if (filters.category.value) params.set("category", filters.category.value);
+    if (filters.subcategory.value) params.set("subcategory", filters.subcategory.value);
+    if (filters.description.value) params.set("description", filters.description.value);
+
+    if (filters.dateMode.value === "specific" && filters.date.value) {
+        params.set("dateMode", "specific");
+        params.set("date", filters.date.value);
+    }
+
+    const queryString = params.toString();
+    const newURL = queryString
+        ? `${window.location.pathname}?${queryString}`
+        : window.location.pathname;
+
+    window.history.replaceState({}, '', newURL);
+}
+
+function applyFilters() {
+    const ticketIdValue = filters.ticketId.value.toLowerCase();
+    const categoryValue = filters.category.value.toLowerCase();
+    const subcategoryValue = filters.subcategory.value.toLowerCase();
+    const descriptionValue = filters.description.value.toLowerCase();
+
+    const dateRaw = filters.date.value;
+    const dateValue =
+        filters.dateMode.value === "specific" && /^\d{4}-\d{2}-\d{2}$/.test(dateRaw)
+            ? dateRaw
+            : "";
+
+    updateURL();
+
+    document.querySelectorAll(".ticket-card").forEach(card => {
+        const ticketId = card.dataset.ticketId.toLowerCase();
+        const category = (card.dataset.category || "").toLowerCase();
+        const subcategory = (card.dataset.subcategory || "").toLowerCase();
+        const description = (card.dataset.description || "").toLowerCase();
+        const ticketDate = new Date(card.dataset.created + "Z");
+        const ticketDateStr = ticketDate.getFullYear() + '-' +
+            String(ticketDate.getMonth() + 1).padStart(2, '0') + '-' +
+            String(ticketDate.getDate()).padStart(2, '0');
+
+        const showCard =
+            (!ticketIdValue || ticketId.includes(ticketIdValue)) &&
+            (!categoryValue || category.includes(categoryValue)) &&
+            (!subcategoryValue || subcategory.includes(subcategoryValue)) &&
+            (!descriptionValue || description.includes(descriptionValue)) &&
+            (!dateValue || ticketDateStr === dateValue);
+
+        card.style.display = showCard ? "block" : "none";
+    });
+}
+
+function resetFilters() {
+    filters.ticketId.value = "";
+    filters.category.value = "";
+    filters.subcategory.value = "";
+    filters.description.value = "";
+    filters.dateMode.value = "all";
+    filters.date.value = "";
+
+    updateDateInputVisibility();
+
+    window.history.replaceState({}, '', window.location.pathname);
+    applyFilters();
+}
+
+function loadFiltersFromURL() {
+    const params = new URLSearchParams(window.location.search);
+
+    filters.ticketId.value = params.get("ticketId") || "";
+    filters.category.value = params.get("category") || "";
+    filters.subcategory.value = params.get("subcategory") || "";
+    filters.description.value = params.get("description") || "";
+
+    if (params.get("dateMode") === "specific" && params.get("date")) {
+        filters.dateMode.value = "specific";
+        filters.date.value = params.get("date");
+    } else {
+        filters.dateMode.value = "all";
+        filters.date.value = "";
+    }
+
+    updateDateInputVisibility();
+    applyFilters();
+}
+
+function attachAutoFilter() {
+    filters.ticketId.addEventListener("input", applyFilters);
+    filters.category.addEventListener("input", applyFilters);
+    filters.subcategory.addEventListener("input", applyFilters);
+    filters.description.addEventListener("input", applyFilters);
+
+    filters.dateMode.addEventListener("change", () => {
+        updateDateInputVisibility();
+        applyFilters();
+    });
+
+    filters.date.addEventListener("change", applyFilters);
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".local-time").forEach(el => {
+        const utc = el.dataset.utc;
+        if (utc) {
+            const localDate = new Date(utc + "Z");
+            el.textContent = localDate.toLocaleString([], { dateStyle: "medium", timeStyle: "short" });
+        }
+    });
+
+    loadFiltersFromURL();
+    attachAutoFilter();
+});
+
+const INACTIVITY_TIMEOUT = 900 * 1000;
+let inactivityTimer;
+
+function logoutUser() {
+    localStorage.setItem("logoutEvent", Date.now());
+    window.location.href = "{{ url_for('logout') }}";
+}
+
+function resetInactivityTimer() {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(() => {
+        alert("You have been logged out due to inactivity.");
+        logoutUser();
+    }, INACTIVITY_TIMEOUT);
+}
+
+['mousemove', 'mousedown', 'keypress', 'scroll', 'touchstart'].forEach(evt => {
+    window.addEventListener(evt, resetInactivityTimer);
+});
+
+resetInactivityTimer();
+
+window.addEventListener('storage', (event) => {
+    if (event.key === 'logoutEvent') {
+        alert("You have been logged out due to inactivity in another tab.");
+        window.location.href = "{{ url_for('logout') }}";
+    }
+});
+</script>
+
+</body>
+</html>

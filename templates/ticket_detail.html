@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Detail</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Ticket #{{ ticket.id }}</h1>
+
+    <div class="ticket-card">
+
+        <div class="ticket-header">
+            <div class="ticket-title">
+                {{ ticket.full_name }}
+            </div>
+
+            <div class="ticket-category">
+                {{ ticket.category }}
+                {% if ticket.subcategory %} • {{ ticket.subcategory }}{% endif %}
+            </div>
+        </div>
+
+        <div class="ticket-body">
+            <span class="description-label">Description</span>
+            <p class="wrap-text">{{ ticket.description }}</p>
+        </div>
+
+        <div class="ticket-meta-grid">
+
+            {% if ticket.username %}
+            <div class="meta-item">
+                <span class="meta-label">Username</span>
+                <span class="meta-value">{{ ticket.username }}</span>
+            </div>
+            {% endif %}
+
+            {% if ticket.machine_id %}
+            <div class="meta-item">
+                <span class="meta-label">Machine</span>
+                <span class="meta-value">{{ ticket.machine_id }}</span>
+            </div>
+            {% endif %}
+
+            {% if ticket.email %}
+            <div class="meta-item">
+                <span class="meta-label">Email</span>
+                <span class="meta-value">{{ ticket.email }}</span>
+            </div>
+            {% endif %}
+
+            {% if ticket.phone %}
+            <div class="meta-item">
+                <span class="meta-label">Phone</span>
+                <span class="meta-value">{{ ticket.phone }}</span>
+            </div>
+            {% endif %}
+
+        </div>
+
+<div class="ticket-footer">
+
+    <form method="POST" action="/ticket_details/update/{{ ticket.id }}">
+
+        <div style="margin-bottom: 10px;">
+            <label><strong>Status</strong></label>
+            <select name="status">
+                <option value="open" {% if ticket.status == "open" %}selected{% endif %}>Open</option>
+                <option value="in progress" {% if ticket.status == "in progress" %}selected{% endif %}>In Progress</option>
+                <option value="closed" {% if ticket.status == "closed" %}selected{% endif %}>Closed</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <label><strong>Resolution Notes</strong></label>
+            <textarea name="resolution_notes" rows="5" style="width:100%;"></textarea>
+        </div>
+
+        <button type="submit">Save Update</button>
+
+    </form>
+
+</div>

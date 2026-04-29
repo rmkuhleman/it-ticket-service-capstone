@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Tickets</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Submitted Tickets</h1>
+    <form action="{{ url_for('logout') }}" method="get" class="switch-user-btn">
+        <button type="submit">Logout</button>
+    </form>
+
+    <div class="ticket-filter-form">
+        <input type="text" id="ticketIdFilter" placeholder="Ticket ID">
+        <input type="text" id="categoryFilter" placeholder="Category">
+        <input type="text" id="subcategoryFilter" placeholder="Subcategory">
+        <input type="text" id="descriptionFilter" placeholder="Description">
+
+        <select id="statusFilter">
+            <option value="all">All statuses</option>
+            <option value="open">Open</option>
+            <option value="in progress">In Progress</option>
+            <option value="escalated">Escalated</option>
+            <option value="closed">Closed</option>
+        </select>
+
+        <select id="dateModeFilter">
+            <option value="all">All dates</option>
+            <option value="specific">Choose a date</option>
+        </select>
+
+        <input type="date" id="dateFilter" style="display: none;">
+
+        <button type="button" onclick="resetFilters()">Reset Filters</button>
+    </div>
+
+    {% if tickets %}
+        {% for ticket in tickets %}
+        <div class="ticket-card"
+             data-ticket-id="{{ ticket.id }}"
+             data-category="{{ ticket.category }}"
+             data-subcategory="{{ ticket.subcategory }}"
+             data-description="{{ ticket.description }}"
+             data-status="{{ (ticket.status or 'open') | lower }}"
+             data-created="{{ ticket.created_at }}">
+
+            <form class="ticket-form ticket-update-form"
+                  method="POST"
+                  action="/tickets/update/{{ ticket.id }}"
+                  onsubmit="clearDirty(this)">
+
+                <div class="ticket-header">
+                    <div>
+                        <div class="ticket-title">{{ ticket.full_name }}</div>
+                        <div style="font-size: 13px; color: #666;">
+                            Username: {{ ticket.username or "Not provided" }}
+                        </div>
+                    </div>
+
+                    <div class="ticket-status-panel">
+                        <div class="ticket-status">
+                            <span class="status-label">Status</span>
+                            <span class="status-badge status-{{ (ticket.status or 'open') | lower | replace(' ', '-') }}">
+                                {{ (ticket.status or "Open") | title }}
+                            </span>
+                        </div>
+
+                        <select
+                            name="status"
+                            data-ticket-id="{{ ticket.id }}"
+                            class="status-select"
+                            onchange="markDirty(this)"
+                        >
+                            <option value="open" {% if (ticket.status or 'open') | lower == "open" %}selected{% endif %}>Open</option>
+                            <option value="in progress" {% if (ticket.status or 'open') | lower == "in progress" %}selected{% endif %}>In Progress</option>
+                            <option value="escalated" {% if (ticket.status or 'open') | lower == "escalated" %}selected{% endif %}>Escalated</option>
+                            <option value="closed" {% if (ticket.status or 'open') | lower == "closed" %}selected{% endif %}>Closed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="ticket-meta-grid">
+
+                    <div class="meta-item">
+                        <span class="meta-label">Ticket ID</span>
+                        <span class="meta-value">{{ ticket.id }}</span>
+                    </div>
+
+                    {% if ticket.email %}
+                    <div class="meta-item">
+                        <span class="meta-label">Email</span>
+                        <span class="meta-value">{{ ticket.email }}</span>
+                    </div>
+                    {% endif %}
+
+                    {% if ticket.phone %}
+                    <div class="meta-item">
+                        <span class="meta-label">Phone</span>
+                        <span class="meta-value">{{ ticket.phone }}</span>
+                    </div>
+                    {% endif %}
+
+                    {% if ticket.machine_id %}
+                    <div class="meta-item">
+                        <span class="meta-label">Machine</span>
+                        <span class="meta-value">{{ ticket.machine_id }}</span>
+                    </div>
+                    {% endif %}
+
+                    <div class="meta-item">
+                        <span class="meta-label">Category</span>
+                        <span class="meta-value">{{ ticket.category }}</span>
+                    </div>
+
+                    {% if ticket.subcategory %}
+                    <div class="meta-item">
+                        <span class="meta-label">Subcategory</span>
+                        <span class="meta-value">{{ ticket.subcategory }}</span>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="ticket-body">
+                    <span class="description-label">Description</span>
+                    <p class="wrap-text">{{ ticket.description }}</p>
+
+                    {% if ticket.resolution_notes %}
+                    <div class="saved-resolution-notes">
+                        <span class="description-label">Saved Resolution Notes</span>
+                        <p class="wrap-text resolution-note-display">{{ ticket.resolution_notes }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% if ticket.feedback_rating and (ticket.status or 'open') | lower == "closed" %}
+                    <div class="feedback-display">
+                        <span class="description-label">User Feedback</span>
+                        <p><strong>Rating:</strong> {{ ticket.feedback_rating }} / 5</p>
+
+                        {% if ticket.feedback_comments %}
+                        <p class="wrap-text">{{ ticket.feedback_comments }}</p>
+                        {% else %}
+                        <p>No written comments provided.</p>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="resolution-editor">
+                    <label for="resolution_notes_{{ ticket.id }}">Resolution Notes</label>
+                    <textarea
+                        id="resolution_notes_{{ ticket.id }}"
+                        name="resolution_notes"
+                        rows="4"
+                        placeholder="Add or edit resolution notes..."
+                    >{{ ticket.resolution_notes or "" }}</textarea>
+
+                    <div class="ticket-action-row">
+                        <button type="submit">Update Ticket</button>
+
+                        <div class="submitted-date">
+                            Submitted: <span class="local-time" data-utc="{{ ticket.created_at }}"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+        {% endfor %}
+
+        <div style="margin-top: 20px; display:flex; gap:10px; align-items:center;">
+            <button id="bulkBtn" onclick="updateAll()">Update All Changes</button>
+            <div id="bulkStatus" style="font-size:13px;"></div>
+        </div>
+
+    {% else %}
+        <p>No tickets have been submitted yet.</p>
+    {% endif %}
+
+</div>
+
+<script>
+const filters = {
+    ticketId: document.getElementById("ticketIdFilter"),
+    category: document.getElementById("categoryFilter"),
+    subcategory: document.getElementById("subcategoryFilter"),
+    description: document.getElementById("descriptionFilter"),
+    status: document.getElementById("statusFilter"),
+    dateMode: document.getElementById("dateModeFilter"),
+    date: document.getElementById("dateFilter")
+};
+
+function updateDateInputVisibility() {
+    if (filters.dateMode.value === "specific") {
+        filters.date.style.display = "inline-flex";
+    } else {
+        filters.date.value = "";
+        filters.date.style.display = "none";
+    }
+}
+
+function applyFilters() {
+    const ticketIdValue = filters.ticketId.value.toLowerCase();
+    const categoryValue = filters.category.value.toLowerCase();
+    const subcategoryValue = filters.subcategory.value.toLowerCase();
+    const descriptionValue = filters.description.value.toLowerCase();
+    const statusValue = filters.status.value.toLowerCase();
+
+    const dateRaw = filters.date.value;
+    const dateValue =
+        filters.dateMode.value === "specific" && /^\d{4}-\d{2}-\d{2}$/.test(dateRaw)
+            ? dateRaw
+            : "";
+
+    document.querySelectorAll(".ticket-card").forEach(card => {
+        const ticketId = card.dataset.ticketId.toLowerCase();
+        const category = (card.dataset.category || "").toLowerCase();
+        const subcategory = (card.dataset.subcategory || "").toLowerCase();
+        const description = (card.dataset.description || "").toLowerCase();
+        const status = (card.dataset.status || "open").toLowerCase();
+
+        const ticketDate = new Date(card.dataset.created + "Z");
+        const ticketDateStr = ticketDate.getFullYear() + '-' +
+            String(ticketDate.getMonth() + 1).padStart(2, '0') + '-' +
+            String(ticketDate.getDate()).padStart(2, '0');
+
+        const showCard =
+            (!ticketIdValue || ticketId.includes(ticketIdValue)) &&
+            (!categoryValue || category.includes(categoryValue)) &&
+            (!subcategoryValue || subcategory.includes(subcategoryValue)) &&
+            (!descriptionValue || description.includes(descriptionValue)) &&
+            (statusValue === "all" || status === statusValue) &&
+            (!dateValue || ticketDateStr === dateValue);
+
+        card.style.display = showCard ? "block" : "none";
+    });
+}
+
+function resetFilters() {
+    filters.ticketId.value = "";
+    filters.category.value = "";
+    filters.subcategory.value = "";
+    filters.description.value = "";
+    filters.status.value = "all";
+    filters.dateMode.value = "all";
+    filters.date.value = "";
+
+    updateDateInputVisibility();
+    applyFilters();
+}
+
+function attachAutoFilter() {
+    filters.ticketId.addEventListener("input", applyFilters);
+    filters.category.addEventListener("input", applyFilters);
+    filters.subcategory.addEventListener("input", applyFilters);
+    filters.description.addEventListener("input", applyFilters);
+    filters.status.addEventListener("change", applyFilters);
+
+    filters.dateMode.addEventListener("change", () => {
+        updateDateInputVisibility();
+        applyFilters();
+    });
+
+    filters.date.addEventListener("change", applyFilters);
+}
+
+function markDirty(el) {
+    el.dataset.dirty = "true";
+    sessionStorage.setItem("pending_status_" + el.dataset.ticketId, el.value);
+}
+
+function clearDirty(form) {
+    const select = form.querySelector(".status-select");
+    if (select) {
+        select.dataset.dirty = "false";
+        sessionStorage.removeItem("pending_status_" + select.dataset.ticketId);
+    }
+}
+
+function restorePendingStates() {
+    document.querySelectorAll(".status-select").forEach(select => {
+        const id = select.dataset.ticketId;
+        const saved = sessionStorage.getItem("pending_status_" + id);
+        if (saved && select.value !== saved) {
+            select.value = saved;
+            select.dataset.dirty = "true";
+        }
+    });
+}
+
+function updateAll() {
+    const btn = document.getElementById("bulkBtn");
+    const statusBox = document.getElementById("bulkStatus");
+
+    const forms = document.querySelectorAll(".ticket-update-form");
+
+    const updates = Array.from(forms).map(form => {
+        const select = form.querySelector(".status-select");
+        const notesBox = form.querySelector("textarea[name='resolution_notes']");
+
+        return {
+            id: Number(select.dataset.ticketId),
+            status: select.value,
+            resolution_notes: notesBox.value
+        };
+    });
+
+    if (updates.length === 0) {
+        statusBox.style.color = "#666";
+        statusBox.textContent = "No tickets to update.";
+        return;
+    }
+
+    btn.disabled = true;
+    statusBox.style.color = "#666";
+    statusBox.textContent = "Updating...";
+
+    fetch("/tickets/update-bulk", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ updates })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (!data.success) throw new Error();
+
+        document.querySelectorAll(".ticket-card").forEach(ticketCard => {
+            const form = ticketCard.querySelector(".ticket-update-form");
+            const select = form.querySelector(".status-select");
+            const notesBox = form.querySelector("textarea[name='resolution_notes']");
+            const badge = ticketCard.querySelector(".status-badge");
+            const newStatus = select.value.toLowerCase();
+            const trimmedNotes = notesBox.value.trim();
+
+            badge.textContent = newStatus.charAt(0).toUpperCase() + newStatus.slice(1);
+            badge.className = `status-badge status-${newStatus.replace(' ', '-')}`;
+            ticketCard.dataset.status = newStatus;
+
+            let notesDisplay = ticketCard.querySelector(".saved-resolution-notes");
+
+            if (trimmedNotes) {
+                if (!notesDisplay) {
+                    const ticketBody = ticketCard.querySelector(".ticket-body");
+
+                    notesDisplay = document.createElement("div");
+                    notesDisplay.className = "saved-resolution-notes";
+
+                    notesDisplay.innerHTML = `
+                        <span class="description-label">Saved Resolution Notes</span>
+                        <p class="wrap-text resolution-note-display"></p>
+                    `;
+
+                    ticketBody.appendChild(notesDisplay);
+                }
+
+                notesDisplay.querySelector(".resolution-note-display").textContent = trimmedNotes;
+            } else if (notesDisplay) {
+                notesDisplay.remove();
+            }
+
+            select.dataset.dirty = "false";
+            sessionStorage.removeItem("pending_status_" + select.dataset.ticketId);
+        });
+
+        statusBox.style.color = "green";
+        statusBox.textContent = "Tickets checked and saved.";
+        setTimeout(() => statusBox.textContent = "", 2000);
+
+        applyFilters();
+    })
+    .catch(() => {
+        statusBox.style.color = "red";
+        statusBox.textContent = "Failed to update changes.";
+    })
+    .finally(() => btn.disabled = false);
+}
+
+document.querySelectorAll(".ticket-update-form").forEach(form => {
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const select = form.querySelector(".status-select");
+        const notesBox = form.querySelector("textarea[name='resolution_notes']");
+        const ticketId = select.dataset.ticketId;
+        const status = select.value;
+        const resolutionNotes = notesBox.value;
+        const ticketCard = form.closest(".ticket-card");
+        const badge = ticketCard.querySelector(".status-badge");
+
+        fetch(`/tickets/update/${ticketId}`, {
+            method: "POST",
+            headers: {"Content-Type": "application/x-www-form-urlencoded"},
+            body: new URLSearchParams({
+                status: status,
+                resolution_notes: resolutionNotes
+            })
+        })
+        .then(() => {
+            badge.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+            badge.className = `status-badge status-${status.replace(' ', '-')}`;
+            ticketCard.dataset.status = status.toLowerCase();
+
+            let notesDisplay = ticketCard.querySelector(".saved-resolution-notes");
+            const trimmedNotes = resolutionNotes.trim();
+
+            if (trimmedNotes) {
+                if (!notesDisplay) {
+                    const ticketBody = ticketCard.querySelector(".ticket-body");
+
+                    notesDisplay = document.createElement("div");
+                    notesDisplay.className = "saved-resolution-notes";
+                    notesDisplay.style.marginTop = "10px";
+
+                 notesDisplay.innerHTML = `
+                        <span class="description-label">Saved Resolution Notes</span>
+                        <p class="wrap-text resolution-note-display" style="background:#f0f8ff; padding:8px; border-radius:6px; margin-top:0;"></p>
+                    `;
+
+                    ticketBody.appendChild(notesDisplay);
+                }
+
+                notesDisplay.querySelector(".resolution-note-display").textContent = trimmedNotes;
+            } else if (notesDisplay) {
+                notesDisplay.remove();
+            }
+
+            clearDirty(form);
+            applyFilters();
+        })
+        .catch(() => alert("Failed to update ticket."));
+    });
+});
+
+function convertLocalTimes() {
+    document.querySelectorAll(".local-time").forEach(el => {
+        const utc = el.dataset.utc;
+        if (utc) {
+            const localDate = new Date(utc + "Z");
+            el.textContent = localDate.toLocaleString([], {
+                dateStyle: "medium",
+                timeStyle: "short"
+            });
+        }
+    });
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    restorePendingStates();
+    convertLocalTimes();
+    updateDateInputVisibility();
+    attachAutoFilter();
+    applyFilters();
+});
+
+window.addEventListener("pageshow", () => {
+    restorePendingStates();
+    convertLocalTimes();
+    applyFilters();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ticket Feedback</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Ticket Feedback</h1>
+
+    <div class="ticket-card">
+
+        <div class="ticket-header">
+            <div>
+                <div class="ticket-title">Ticket #{{ ticket.id }}</div>
+                <div style="font-size: 13px; color: #666;">
+                    {{ ticket.category }}{% if ticket.subcategory %} • {{ ticket.subcategory }}{% endif %}
+                </div>
+            </div>
+
+            <div class="ticket-status-panel">
+                <div class="ticket-status">
+                    <span class="status-label">Status</span>
+                    <span class="status-badge status-{{ (ticket.status or 'open') | lower | replace(' ', '-') }}">
+                        {{ (ticket.status or "Open") | title }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <p class="wrap-text">{{ ticket.description }}</p>
+
+        {% if existing_feedback %}
+        <div class="resolution-alert">
+            You already submitted feedback. You can update it below.
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <p class="error-message">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('feedback', ticket_id=ticket.id) }}">
+
+            <label for="rating">Rating *</label>
+            <select id="rating" name="rating" required>
+                <option value="">Select a rating</option>
+                {% for value in [5, 4, 3, 2, 1] %}
+                <option value="{{ value }}"
+                    {% if existing_feedback and existing_feedback.rating == value %}selected{% endif %}>
+                    {{ value }} - {% if value == 5 %}Excellent{% elif value == 4 %}Good{% elif value == 3 %}Okay{% elif value == 2 %}Poor{% else %}Very Poor{% endif %}
+                </option>
+                {% endfor %}
+            </select>
+
+            <label for="comments">Comments</label>
+            <textarea id="comments" name="comments" rows="5" maxlength="1000" placeholder="Optional feedback about the support experience...">{% if existing_feedback %}{{ existing_feedback.comments }}{% endif %}</textarea>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+
+        <div style="margin-top: 20px;">
+            <a href="{{ url_for('ticket_details', ticket_id=ticket.id) }}">Back to Ticket Details</a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
