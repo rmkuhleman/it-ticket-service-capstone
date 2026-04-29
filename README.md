@@ -8,11 +8,12 @@ The project now includes secure user authentication with hashed passwords and se
 ## Documentation
 
 Detailed project documentation can be found in the `/docs` folder, including:
-- Development logs
-- Testing notes
-- Workflow diagrams
-- Time tracking
+- [Development Logs](docs/development-log.md)
+- [Page Plan](docs/page-plan.md)
 - [Project Scope](docs/project-scope.md)
+- [Technology Stack](docs/technology-stack.md)
+- [Testing Notes](docs/testing-notes.md)
+- [Time Logs](docs/time-log.md)
 - [Workflow Diagram](docs/workflow-diagram.md)
 
 ## Current Capstone Progress
