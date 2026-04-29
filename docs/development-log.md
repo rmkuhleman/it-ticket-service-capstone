@@ -217,3 +217,43 @@ Date: April 23, 2026
 - Optionally implement role-based access (admin vs user accounts).
 - Perform final UI polish and prepare for presentation/demo.
 - Practice explaining system architecture, authentication flow, and security decisions.
+
+## Work Session 9 – Feedback System, Escalation Workflow, and Finalization
+**Date:** April 28, 2026
+
+### What I worked on
+- Implemented a full feedback system allowing users to submit ratings and comments for closed tickets.
+- Created a `feedback` table in the database and integrated it with both user and admin views.
+- Ensured feedback can only be submitted for closed tickets and can be updated if needed.
+- Integrated feedback display into the admin dashboard for technician review.
+- Added role-based access control by introducing a `role` field in the users table.
+- Implemented `admin_required` decorator to restrict access to admin-only routes.
+- Configured login flow to redirect admins to the `/tickets` dashboard and users to `/my_tickets`.
+- Removed temporary admin privilege route (`/make_admin`) after assigning admin role directly in the database.
+- Added "Escalated" as a new ticket status and integrated it into the full ticket lifecycle.
+- Updated admin dashboard to allow selection of Escalated status and ensured it displays correctly across all views.
+- Added visual indicator and styling for escalated tickets to improve clarity in the UI.
+- Refined status badge colors to clearly distinguish Open, In Progress, Escalated, and Closed states.
+- Performed full system testing to confirm:
+  - User and admin workflows function correctly
+  - Role-based access is enforced
+  - Feedback logic works as intended
+  - Escalation status updates properly across all pages
+- Finalized project documentation:
+  - Updated README to reflect completed features
+  - Revised project scope, page plan, and workflow documents to match implementation
+  - Completed testing notes to document issues encountered and resolved
+  - Organized all documentation into the `/docs` folder
+
+### Outcome
+- The system now includes a complete ticket lifecycle with escalation and feedback.
+- Role-based access control ensures proper separation between user and admin functionality.
+- Admins can manage tickets, view feedback, and escalate issues as needed.
+- Users can track tickets, view resolution details, and provide feedback after completion.
+- All documentation is now accurate, complete, and aligned with the implemented system.
+- The project is stable, fully functional, and ready for submission.
+
+### Next Step
+- Final review of submission materials
+- Capture final screenshots for documentation
+- Submit project to Canvas
