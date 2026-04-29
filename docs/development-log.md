@@ -1,5 +1,7 @@
 # Development Log
 
+Development of this project began with planning and proposal approval in early March, followed by focused implementation and refinement during early-mid April.
+
 ## Work Session 1 - Repository Setup and Planning
 Date: April 14, 2026
 
