@@ -28,8 +28,8 @@ This workflow explains how a user submits a ticket, what the system does in term
 
 A ticket will usually move through the following statuses:
 
-**Open → In Progress → Resolved → Closed**
+**Open → In Progress → Closed**
 
 If a more serious issue occurs, the flow may become:
 
-**Open → In Progress → Escalated → Resolved → Closed**
+**Open → In Progress → Escalated → Closed**
