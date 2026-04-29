@@ -1,48 +1,65 @@
 # IT Ticket Service Technology Stack
 
-This document explains the technology stack that will be used for the IT Ticket Service project and why each part was chosen. The main goal is to use tools that are simple, practical, and manageable for the scope of this capstone project.
+This document explains the technology stack used for the IT Ticket Service project and why each component was chosen. The goal was to use tools that are practical, efficient, and appropriate for the scope of this capstone project.
+
 
 ## Backend
-The backend of the project will use **Python with Flask**.
+The backend of the project uses **Python with Flask**.
 
 ### Reason for Choice
-Python is a widely used programming language that is practical and easy for this type of application. Flask is a lightweight web framework that works well for small to medium-sized projects. It is a good fit for this capstone because it allows the project to stay simple while still supporting forms, routing, database interaction, and page rendering.
+Python is a widely used and practical programming language for building web applications. Flask is a lightweight web framework that allows for quick development while supporting routing, form handling, session management, and database interaction. It was chosen to keep the project simple while still enabling full backend functionality.
+
 
 ## Frontend
-The frontend of the project will use **HTML, CSS, and JavaScript**.
+The frontend of the project uses **HTML, CSS, and JavaScript**.
 
 ### Reason for Choice
-HTML, CSS, and JavaScript are enough to build the pages needed for this project. They support form creation, page layout, styling, and basic interactivity. This keeps the project easier to manage while still allowing the interface to be clear and user-friendly.
+These technologies provide everything needed to build a clean and functional user interface. HTML structures the pages, CSS handles styling and layout, and JavaScript enables dynamic behavior such as time formatting and interactivity. This approach keeps the project manageable while still delivering a good user experience.
+
 
 ## Database
-The database for the project will use **SQLite**.
+The database for the project uses **SQLite**.
 
 ### Reason for Choice
-SQLite is a lightweight database that works well for smaller projects and prototypes. It does not require a separate database server, which makes it easier to set up and use during development. It is a practical choice for storing ticket data in this capstone project.
+SQLite is a lightweight, file-based database that does not require a separate server. It is ideal for small to medium-sized applications and allows for quick setup and easy data management. It is used to store users, tickets, and feedback data.
+
 
 ## Development Tools
-The project will be developed using:
+The project was developed using:
+
 - Python
 - Flask
 - SQLite
 - HTML
 - CSS
 - JavaScript
-- GitHub for version control and documentation
+- GitHub (version control and documentation)
 
-## Planned Project Structure
-The project will likely use a structure similar to the following:
+
+## Key Technical Features
+
+- Session-based authentication
+- Password hashing using Werkzeug
+- Role-based access control (user vs admin)
+- Relational database design (tickets, users, feedback)
+- Form validation and input sanitization
+- Dynamic status handling (Open, In Progress, Escalated, Closed)
+
+
+## Project Structure
 
 ```text
 it-ticket-service-capstone/
 ├── app.py
-├── database.db
+├── tickets.db
 ├── templates/
 │   ├── index.html
+│   ├── login.html
+│   ├── my_tickets.html
 │   ├── confirm.html
-│   ├── dashboard.html
-│   ├── ticket_detail.html
+│   ├── tickets.html
 │   └── feedback.html
+|   └── ticket_details.html
 ├── static/
 │   ├── style.css
 │   └── script.js
@@ -54,4 +71,5 @@ it-ticket-service-capstone/
 │   ├── development-log.md
 │   ├── time-log.md
 │   └── testing-notes.md
+├── images/
 └── README.md
