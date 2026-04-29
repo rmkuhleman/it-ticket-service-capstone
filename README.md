@@ -32,7 +32,7 @@ Detailed project documentation can be found in the `/docs` folder, including:
 ![Login Page](images/updated-login-page.png)
 *Secure login page with username and password authentication, supporting both new account creation, returning user access, and admin/technician access.*
 
-![My Tickets Dashboard](images/my-ticket-page-final.png)
+![My Tickets Dashboard](images/my-tickets-page-final.png)
 *User-specific ticket dashboard displaying submitted tickets with filtering options and real-time status tracking.*
 
 ### Ticket Management
