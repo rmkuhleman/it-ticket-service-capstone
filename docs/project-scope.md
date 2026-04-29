@@ -4,7 +4,6 @@ The purpose of this project is to create a web-based service that provides users
 
 This service is designed to be simple, scalable, and adaptable for use in small organizations, with the potential to expand to larger environments such as businesses or healthcare settings.
 
----
 
 ## Main Features
 
