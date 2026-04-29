@@ -25,6 +25,7 @@ The core application is built using Python (Flask) for the backend and HTML, CSS
 - [`app.py`](app.py) contains the Flask backend, routes, authentication, role-based access control, ticket management, and database logic.
 - [`templates/`](templates/) contains the HTML pages for login, ticket submission, user ticket views, admin dashboard, ticket details, and feedback.
 - [`static/`](static/) contains the frontend styling and JavaScript used for layout, form behavior, and UI improvements.
+- `tickets.db` is a SQLite database used to store users, tickets, and feedback. It is automatically initialized and updated through the Flask application.
 
 Together, these files support user authentication, ticket submission, admin ticket management, escalation handling, resolution notes, and feedback collection.
 
