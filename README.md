@@ -40,7 +40,7 @@ Detailed project documentation can be found in the `/docs` folder, including:
 *Detailed view of a submitted ticket while the issue is still in progress.*
 
 ![Ticket Details - Closed](images/ticket-details-closed-feedback.png)
-*Completed ticket view displaying final resolution notes and submitted feedback notes. Feedback notes only appear once the issue has been marked as closed.*
+*Completed ticket view displaying final resolution notes and submitted feedback notes. Feedback and resolution notes only appear once the issue has been marked as closed.*
 
 ![Ticket Feedback Form](images/ticket-feedback-page.png)
 *Ticket feedback form displaying notes or feedback the user had on the service provided.*
