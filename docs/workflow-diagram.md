@@ -1,34 +1,50 @@
 # IT Ticket Service Workflow
 
-This workflow explains how a user submits a ticket, what the system does in terms of organization and storage, how the ticket is reviewed and updated by a technician, and how the user provides feedback after the issue is resolved. This further defines the full process of the IT Ticket Service.
+This workflow explains how a user submits a ticket, how the system processes and stores it, how an administrator manages the ticket, and how feedback is collected after resolution. It represents the complete lifecycle of a ticket within the IT Ticket Service.
+
+---
 
 ## Main Actors
 
-- **User:** Submits a ticket and gives feedback following the issue’s resolution.
-- **System:** Stores the ticket, organizes it, and supports routing or escalation.
-- **Technician/Admin:** Reviews tickets, updates ticket statuses, resolves issues, or escalates them when needed.
+- **User:** Logs in, submits tickets, tracks status, and provides feedback after resolution.  
+- **System:** Stores tickets, manages sessions, enforces access control, and supports filtering and organization.  
+- **Technician/Admin:** Reviews tickets, updates statuses, adds resolution notes, escalates issues, and closes tickets.  
+
+---
 
 ## Workflow Steps
 
-1. The user logins the IT Ticket Service form.
-3. The user enters required information such as name, email, username, phone number, machine ID/name, issue category, issue subcategory, and a brief description of the issue.
-4. The user submits the ticket into the system.
-5. The system stores the ticket and gives it a default status of **Open**.
-6. The system oragnize tickets to allow the use of filters for the user and the technician/admin.
-7. A technician or admin views the submitted ticket in the dashboard.
-8. The technician or admin reviews the contents of the ticket and updates the ticket status when needed.
-9. If the issue is more serious or requires a higher level of support, the ticket is escalated.
-10. If the issue can be handled without escalation, the technician or admin works toward resolving the issue.
-11. Once the issue is resolved, the ticket status is changed to **Closed**.
-12. The user is informed that the ticket has been closed.
-13. The user submits feedback about the service.
+1. The user logs into the IT Ticket Service using a username and password.  
+2. If the user does not already have an account, one is created automatically.  
+3. The user submits a ticket by entering required information such as name, contact details, machine ID, issue category, and description.  
+4. The system validates the input and stores the ticket in the database.  
+5. The ticket is assigned a default status of **Open**.  
+6. The user can view their ticket on the **My Tickets** dashboard, with filtering and status tracking.  
+7. An administrator logs in and accesses the **Admin Dashboard** to view all tickets.  
+8. The administrator reviews the ticket and updates its status as needed.  
+9. If the issue requires higher-level support, the ticket is marked as **Escalated**.  
+10. If the issue can be handled directly, the administrator continues working on it and may mark it as **In Progress**.  
+11. Once the issue is fully resolved, the administrator updates the ticket status to **Closed** and may add resolution notes.  
+12. The user can view the updated ticket details, including resolution notes once the ticket is closed.  
+13. The user submits feedback (rating and comments) for the resolved ticket.  
+
+---
 
 ## Ticket Status Flow
 
-A ticket will usually move through the following statuses:
-
-**Open → In Progress → Closed**
-
-If a more serious issue occurs, the flow may become:
+A ticket progresses through the following lifecycle:
 
 **Open → In Progress → Escalated → Closed**
+
+Notes:
+- **Escalated** indicates the issue requires higher-level support and is still active.  
+- **Closed** indicates the issue has been fully resolved.  
+- Feedback is only available once a ticket is closed.  
+
+---
+
+## Access Control
+
+- Users can only view and interact with their own tickets.  
+- Administrators have access to all tickets and management functionality.  
+- Role-based access control ensures separation between user and admin actions.  
