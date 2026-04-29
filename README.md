@@ -42,6 +42,9 @@ Detailed project documentation can be found in the `/docs` folder, including:
 ![Ticket Details - Closed](images/updated-closed-ticket-details-page.png)
 *Completed ticket view displaying final resolution notes once the issue has been marked as closed.*
 
+![Ticket Details - Closed](images/updated-closed-ticket-details-page.png)
+*Ticket feedback form displaying notes the user had on the service provided*
+
 ### Admin Interface
 ![Admin Dashboard](images/updated-admin-page.png)
-*Administrative dashboard for managing all tickets, including status updates, escalation handling, resolution notes, and bulk update functionality.*
+*Administrative dashboard for managing all tickets, including status updates, escalation handling, resolution notes, bulk update functionality, and per ticket feedback.*
