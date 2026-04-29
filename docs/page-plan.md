@@ -1,8 +1,24 @@
 # IT Ticket Service Page Plan
 
-This document outlines the main pages that will be included in the IT Ticket Service project. The goal is to keep the system simple, organized, and easy to use while still covering the main functions of ticket submission, review, updating, resolution, and feedback.
+This document outlines the main pages included in the IT Ticket Service project. The system is designed to be simple, organized, and user-friendly while supporting ticket submission, tracking, management, escalation, resolution, and feedback.
 
-## Page 1: Ticket Submission Page
+
+## Page 1: Login Page
+
+### Purpose
+This page allows users to log in or create an account to access the system.
+
+### Main Elements
+- Username field
+- Password field
+- Login / Create Account functionality
+- Error messages for invalid input
+
+### Notes
+User authentication is session-based, and accounts are created automatically on first login.
+
+
+## Page 2: Ticket Submission Page (Home)
 
 ### Purpose
 This page allows the user to submit a support ticket for an IT or technical issue.
@@ -11,7 +27,6 @@ This page allows the user to submit a support ticket for an IT or technical issu
 - Full name field
 - Email field
 - Phone number field
-- Username field
 - Machine ID/name field
 - Issue category dropdown
 - Issue subcategory dropdown
@@ -19,72 +34,77 @@ This page allows the user to submit a support ticket for an IT or technical issu
 - Submit button
 
 ### Notes
-This page should be clear and user-friendly. Required fields should be easy to identify, and the layout should avoid overwhelming the user.
+The username is pulled from the session and is not manually entered. The form includes validation to ensure required fields are completed.
 
-## Page 2: Submission Confirmation Page
+
+## Page 3: My Tickets Page
 
 ### Purpose
-This page confirms that the ticket was successfully submitted.
+This page allows users to view and manage their submitted tickets.
 
 ### Main Elements
-- Confirmation message
+- List of user-specific tickets
 - Ticket ID
-- Current ticket status
-- Short message explaining that the request has been logged
+- Status badge (Open, In Progress, Escalated, Closed)
+- Description preview
+- Filtering options (ID, category, description, date)
+- Link to ticket details
 
 ### Notes
-This page should reassure the user that the ticket is now in the system and waiting to be reviewed.
+Users can only view their own tickets. The page is designed as a clean dashboard for quick access to ticket information.
 
-## Page 3: Admin/Technician Dashboard
 
-### Purpose
-This page allows a technician or admin to view submitted tickets and manage them.
-
-### Main Elements
-- List of submitted tickets
-- Ticket ID
-- Username
-- Issue category
-- Issue subcategory
-- Ticket status
-- Date submitted
-- Filter or sorting options
-
-### Notes
-The dashboard should be organized and easy to read. It should allow tickets to be reviewed quickly without unnecessary clutter.
-
-## Page 4: Ticket Detail Page
+## Page 4: Ticket Details Page
 
 ### Purpose
-This page allows a technician or admin to open an individual ticket and review or update it.
+This page displays full details of a selected ticket.
 
 ### Main Elements
 - Full ticket information
-- User information
+- User and contact details
 - Machine ID/name
 - Category and subcategory
-- Issue description
-- Status update option
-- Escalation option
-- Resolution notes box
-- Save/update button
+- Description
+- Status badge
+- Resolution notes (only visible when closed)
+- Link back to My Tickets
 
 ### Notes
-This page should support the technician’s workflow by making it easy to review the issue and update the ticket.
+This page provides a read-only detailed view for users. It ensures users only access their own ticket data.
 
-## Page 5: Feedback Page
+
+## Page 5: Admin/Technician Dashboard
 
 ### Purpose
-This page allows the user to provide feedback after the ticket has been resolved.
+This page allows administrators to view and manage all submitted tickets.
 
 ### Main Elements
-- Ticket ID reference
-- Satisfaction rating
-- Feedback comment box
-- Submit feedback button
+- List of all tickets
+- Search and filtering options
+- Ticket status dropdown (Open, In Progress, Escalated, Closed)
+- Resolution notes input
+- Bulk update functionality
+- Feedback display (rating and comments)
 
 ### Notes
-This page should be simple and short so the user can quickly share their experience with the service.
+This page is restricted to admin users only. It provides full control over ticket lifecycle management.
+
+
+## Page 6: Feedback Page
+
+### Purpose
+This page allows users to submit feedback after a ticket has been resolved.
+
+### Main Elements
+- Ticket reference
+- Rating (1–5)
+- Comment box
+- Submit button
+
+### Notes
+Feedback can only be submitted for closed tickets. Users can update their feedback if needed.
+
 
 ## Overall Design Notes
-The system should use as few pages as possible while still keeping each section organized. The pages should be clear, simple, and easy to navigate for users with different levels of technical experience.
+
+The system minimizes the number of pages while keeping functionality organized and easy to navigate. The design prioritizes clarity, usability, and efficient workflows for both users and administrators.
