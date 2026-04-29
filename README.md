@@ -32,7 +32,7 @@ Detailed project documentation can be found in the `/docs` folder, including:
 ![Login Page](images/updated-login-page.png)
 *Secure login page with username and password authentication, supporting both new account creation and returning user access.*
 
-![My Tickets Dashboard](images/updated-my-ticket-page.png)
+![My Tickets Dashboard](images/my-ticket-page-final.png)
 *User-specific ticket dashboard displaying submitted tickets with filtering options and real-time status tracking.*
 
 ### Ticket Management
@@ -42,9 +42,9 @@ Detailed project documentation can be found in the `/docs` folder, including:
 ![Ticket Details - Closed](images/updated-closed-ticket-details-page.png)
 *Completed ticket view displaying final resolution notes once the issue has been marked as closed.*
 
-![Ticket Details - Closed](images/updated-closed-ticket-details-page.png)
-*Ticket feedback form displaying notes the user had on the service provided*
+![Ticket Feedback Form](images/ticket-feedback-page.png)
+*Ticket feedback form displaying notes or feedback the user had on the service provided.*
 
 ### Admin Interface
-![Admin Dashboard](images/updated-admin-page.png)
+![Admin Dashboard](images/admin-page-final.png)
 *Administrative dashboard for managing all tickets, including status updates, escalation handling, resolution notes, bulk update functionality, and per ticket feedback.*
