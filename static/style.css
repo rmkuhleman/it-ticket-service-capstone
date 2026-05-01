@@ -244,6 +244,11 @@ button:hover {
     color: #721c24;
 }
 
+.status-escalated {
+    background-color: #ede9fe;
+    color: #5b21b6;
+}
+
 .desc-meta {
     display: flex;
     justify-content: space-between;
@@ -314,11 +319,59 @@ button:hover {
 }
 
 .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
     margin-bottom: 24px;
+}
+
+.filter-bar input,
+.filter-bar select,
+.filter-bar button,
+.filter-bar .btn {
+    height: 36px;
+    font-size: 14px;
+    padding: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 5px;
 }
 
 .filter-bar button {
     margin-top: 10px;
+}
+
+.filter-action-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.filter-action-row button,
+.filter-action-row .submit-ticket-btn {
+    height: 38px;
+    margin: 0;
+    padding: 0 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.filter-action-row .submit-ticket-btn {
+    margin-left: auto;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border: none;
+}
+
+.filter-action-row .submit-ticket-btn:hover {
+    background-color: #555;
 }
 
 .ticket-bottom-row {
@@ -369,25 +422,6 @@ button:hover {
     white-space: pre-line;
 }
 
-.filter-bar {
-    margin-bottom: 24px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.filter-bar input,
-.filter-bar select,
-.filter-bar button {
-    height: 36px;
-    display: inline-flex;
-    align-items: center;
-    padding: 0 10px;
-    line-height: 1.4;
-    font-size: 14px;
-}
-
 .ticket-description-preview {
     display: -webkit-box;
     line-clamp: 3;
@@ -410,12 +444,19 @@ button:hover {
     margin-top: 10px;
 }
 
-.ticket-description-preview {
-    word-break: break-word;
-}
-
 #bulkStatus {
-    padding-top: 20px;
+    width: 210px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    line-height: 36px;
+    color: #666;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .feedback-display {
@@ -431,7 +472,87 @@ button:hover {
     margin-bottom: 8px;
 }
 
-.status-escalated {
-    background-color: #ede9fe;
-    color: #5b21b6;
+.filter-controls-left {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.filter-controls-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.submit-ticket-btn,
+.update-all-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 6px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.submit-ticket-btn:hover,
+.update-all-btn:hover {
+    background-color: #555;
+}
+
+.top-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+.top-controls .btn,
+.update-all-btn {
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 14px;
+    line-height: 1.4;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.ticket-filter-action-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.ticket-filter-action-row button {
+    margin-top: 0;
+}
+
+.bulk-update-row {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#bulkStatus {
+    width: 210px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    line-height: 36px;
+    color: #666;
+    text-align: right;
+    box-sizing: border-box;
 }
