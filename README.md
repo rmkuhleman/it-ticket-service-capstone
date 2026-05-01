@@ -3,6 +3,8 @@
 This capstone project focuses on creating an IT ticket service that allows users to submit technical issues, enables technicians to review and manage tickets, and supports escalation, resolution, and user feedback.
 
 ## Current Status
+
+### The Project is Complete
 The project includes secure user authentication with hashed passwords and session-based access control, ensuring users can only view their own tickets. Ticket submission, confirmation, and user-specific views are fully functional. The My Tickets page provides a clean dashboard with filtering, status tracking, and resolution note indicators.
 
 The admin interface supports full ticket management, including status updates (Open, In Progress, Escalated, Closed), resolution notes, and bulk updates. A feedback system allows users to rate and comment on resolved tickets, and escalation handling supports routing issues to higher levels of support. The system is stable, consistent in UI, and ready for final submission.
