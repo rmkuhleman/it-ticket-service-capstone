@@ -43,7 +43,7 @@ Together, these files support user authentication, ticket submission, admin tick
 ![Login Page](images/updated-login-page.png)
 *Secure login page with username and password authentication, supporting both new account creation, returning user access, and admin/technician access.*
 
-![My Tickets Dashboard](images/my-tickets-page-final.png)
+![My Tickets Dashboard](images/my-tickets-page-done.png)
 *User-specific ticket dashboard displaying submitted tickets with filtering options and real-time status tracking.*
 
 ### Ticket Management
@@ -57,5 +57,5 @@ Together, these files support user authentication, ticket submission, admin tick
 *Ticket feedback form for displaying notes or feedback the user had on the service provided.*
 
 ### Admin Interface
-![Admin Dashboard](images/admin-page-final.png)
+![Admin Dashboard](images/tickets-page-done.png)
 *Administrative dashboard for managing all tickets, including status updates, escalation handling, resolution notes, bulk update functionality, and per ticket feedback.*
