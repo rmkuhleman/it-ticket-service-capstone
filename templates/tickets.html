@@ -32,10 +32,20 @@
             <option value="specific">Choose a date</option>
         </select>
 
-        <input type="date" id="dateFilter" style="display: none;">
+                <input type="date" id="dateFilter" style="display: none;">
 
-        <button type="button" onclick="resetFilters()">Reset Filters</button>
-    </div>
+                <div class="ticket-filter-action-row">
+                    <button type="button" onclick="resetFilters()">Reset Filters</button>
+
+                    <div class="bulk-update-row">
+                        <div id="bulkStatus"></div>
+
+                        {% if tickets %}
+                        <button id="bulkBtn" type="button" onclick="updateAll()">Update All Changes</button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
 
     {% if tickets %}
         {% for ticket in tickets %}
@@ -172,11 +182,6 @@
         </div>
         {% endfor %}
 
-        <div style="margin-top: 20px; display:flex; gap:10px; align-items:center;">
-            <button id="bulkBtn" onclick="updateAll()">Update All Changes</button>
-            <div id="bulkStatus" style="font-size:13px;"></div>
-        </div>
-
     {% else %}
         <p>No tickets have been submitted yet.</p>
     {% endif %}
@@ -223,7 +228,7 @@ function applyFilters() {
         const description = (card.dataset.description || "").toLowerCase();
         const status = (card.dataset.status || "open").toLowerCase();
 
-        const ticketDate = new Date(card.dataset.created + "Z");
+        const ticketDate = new Date(card.dataset.created);
         const ticketDateStr = ticketDate.getFullYear() + '-' +
             String(ticketDate.getMonth() + 1).padStart(2, '0') + '-' +
             String(ticketDate.getDate()).padStart(2, '0');
@@ -310,7 +315,7 @@ function updateAll() {
     });
 
     if (updates.length === 0) {
-        statusBox.style.color = "#666";
+        statusBox.style.color = "#555";
         statusBox.textContent = "No tickets to update.";
         return;
     }
@@ -366,15 +371,15 @@ function updateAll() {
             sessionStorage.removeItem("pending_status_" + select.dataset.ticketId);
         });
 
-        statusBox.style.color = "green";
-        statusBox.textContent = "Tickets checked and saved.";
+        statusBox.style.color = "#666";
+        statusBox.textContent = "Tickets saved.";
         setTimeout(() => statusBox.textContent = "", 2000);
 
         applyFilters();
     })
     .catch(() => {
-        statusBox.style.color = "red";
-        statusBox.textContent = "Failed to update changes.";
+        statusBox.style.color = "#721c24";
+        statusBox.textContent = "Update failed.";
     })
     .finally(() => btn.disabled = false);
 }
@@ -437,9 +442,9 @@ document.querySelectorAll(".ticket-update-form").forEach(form => {
 
 function convertLocalTimes() {
     document.querySelectorAll(".local-time").forEach(el => {
-        const utc = el.dataset.utc;
-        if (utc) {
-            const localDate = new Date(utc + "Z");
+        const savedTime = el.dataset.utc;
+        if (savedTime) {
+            const localDate = new Date(savedTime);
             el.textContent = localDate.toLocaleString([], {
                 dateStyle: "medium",
                 timeStyle: "short"
