@@ -19,6 +19,7 @@ Detailed project documentation can be found in the `/docs` folder, including:
 - [Testing Notes](docs/testing-notes.md)
 - [Time Logs](docs/time-log.md)
 - [Workflow Diagram](docs/workflow-diagram.md)
+- [Results of the Project](docs/project-results.md)
 
 ## Code Structure
 
