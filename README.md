@@ -14,12 +14,12 @@ The admin interface supports full ticket management, including status updates (O
 Detailed project documentation can be found in the `/docs` folder, including:
 - [Development Logs](docs/development-log.md)
 - [Page Plan](docs/page-plan.md)
+- [Project Results](docs/project-results.md)
 - [Project Scope](docs/project-scope.md)
 - [Technology Stack](docs/technology-stack.md)
 - [Testing Notes](docs/testing-notes.md)
 - [Time Logs](docs/time-log.md)
 - [Workflow Diagram](docs/workflow-diagram.md)
-- [Results of the Project](docs/project-results.md)
 
 ## Code Structure
 
