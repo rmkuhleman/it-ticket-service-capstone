@@ -47,6 +47,10 @@ Together, these files support user authentication, ticket submission, admin tick
 
 *Secure login page with username and password authentication, supporting both new account creation, returning user access, and admin/technician access.*
 
+![Ticket Form](images/ticket-form-page-done.png)
+
+*Technical form that is submitted by username. Users must fill out the required fields or else the form will not submit.*
+
 ![My Tickets Dashboard](images/my-tickets-page-done.png)
 
 *User-specific ticket dashboard displaying submitted tickets with filtering options and real-time status tracking.*
