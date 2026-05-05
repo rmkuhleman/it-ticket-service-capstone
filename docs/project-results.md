@@ -1,6 +1,6 @@
 # Final Results of the Project
 
-## 1. Proposal Background to Cover
+## 1. Original Proposal Background
 
 The original proposal described an IT ticket service that would let users submit technical issues, organize those issues by category, and help determine whether the issue needed regular or higher-level support. The goal was a simple, user-friendly service that could be adapted for organizations that need a faster way to record, manage, and resolve IT problems.
 
