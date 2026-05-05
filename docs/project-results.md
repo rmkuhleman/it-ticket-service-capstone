@@ -1,4 +1,4 @@
-# Final Results of the Project
+# Results of the Project
 
 ## 1. Original Proposal Background
 
